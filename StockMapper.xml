@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="stock">
+  <select id="selectAll" resultType="stockVo">
+    select * from stock order by no desc
+  </select>
+  <select id="detail" resultType="stockVo">
+  	select * from stock where coname=#{coname}
+  </select>
+  <select id="myselectAll" resultType="mystockVo">
+  	select coname,sum(qty) sq,sum(total) st from orderstock group by coname
+  </select>
+  <insert id="insertorderstock">
+  	insert into orderstock values(seq_orderstock.nextval,#{coname},#{qty},#{total})
+  </insert>
+  <delete id="deleteStock">
+	delete orderstock where coname=#{coname}  	
+  </delete>
+  
+</mapper>
